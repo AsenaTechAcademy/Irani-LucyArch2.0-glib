@@ -1,0 +1,207 @@
+<ui:composition template="/templates/CPanelLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<ui:define id="content" name="content">
+<br/><br/>
+
+	 
+<h:form id="frmNewEdit">	
+		<p:dialog dir="rtl" id="dlgNewEdit" header="ثبت / ویرایش اطلاعات اعضا" widgetVar="dlgNewEdit" styleClass="btitr18-red"
+				  closable="false" width="900" height="700">				  
+					
+			<p:outputLabel value="لطفا دقت نمایید، تکمیل فیلدهای ستاره دار الزامی می باشد." styleClass="bnazaninbold16-red"/>
+			<br/>
+
+										
+	        <h:panelGrid id="panelgridNewEdit" columns="2" columnClasses="bnazaninbold16-blue">					           
+					            
+	            <p:outputLabel for="mno" value="کد عضو (یکتا): " styleClass="bnazaninbold16-blue"/>
+	            <p:inputText rendered="#{!MemberMB.isEdit}"  id="mno" maxlength="199" value="#{MemberMB.baseEntity.mno}"
+	            			required="true" requiredMessage="فیلد کد عضو نباید خالی باشد">
+	            </p:inputText>
+	            <p:outputLabel  rendered="#{MemberMB.isEdit}"  value="#{MemberMB.baseEntity.mno}" styleClass="bnazaninbold16-red"/>
+	            
+	            	         	      
+	            <p:outputLabel for="name" value="نام عضو: " styleClass="bnazaninbold16-blue"/>
+	            <p:inputText id="name" maxlength="99" value="#{MemberMB.baseEntity.name}"
+	               			required="true" requiredMessage="فیلد نام عضو نباید خالی باشد">					           
+	            </p:inputText>
+
+	            <p:outputLabel for="family" value="نام خانوادگی عضو: " styleClass="bnazaninbold16-blue"/>
+	            <p:inputText id="family" maxlength="99" value="#{MemberMB.baseEntity.family}"
+	               			required="true" requiredMessage="فیلد نام خانوادگی عضو نباید خالی باشد">					           
+	            </p:inputText>
+
+	            <p:outputLabel for="mellicode" value="کد ملی عضو: " styleClass="bnazaninbold16-blue"/>
+	            <p:inputMask id="mellicode" mask="9999999999" value="#{MemberMB.baseEntity.mellicode}" 
+	            			required="true" requiredMessage="کد ملی عضو نباید خالی باشد" validatorMessage="فقط یک رقم میتواند باشد">
+	            </p:inputMask>
+
+				<p:outputLabel for="mobile" value="شماره تلفن همراه: " styleClass="bnazaninbold16-blue" />
+				<p:inputMask maxlength="11" id="mobile" value="#{MemberMB.baseEntity.mobile}" label="mobile" mask="99999999999" required="true"
+					styleClass="bnazaninbold18" requiredMessage="فيلد شماره تلفن همراه نبايد خالي باشد.">
+				</p:inputMask>
+
+	            <p:outputLabel for="phone" value="تلفن ثابت منزل به همراه کد: " styleClass="bnazaninbold16-blue"/>
+	            <p:inputMask id="phone" mask="99999999999" value="#{MemberMB.baseEntity.phone}" 
+	            			required="true" requiredMessage="فیلد تلفن ثابت منزل عضو نباید خالی باشد">
+	            </p:inputMask>
+
+
+				<h:outputLabel for="email" value="پست الکترونیک: " styleClass="bnazaninbold16-blue" />
+				<p:inputText maxlength="99" id="email" required="true" requiredMessage="فيلد پست الکترونیک نبايد خالي باشد."
+					validatorMessage="فرمت پست الکترونیک را درست وارد کنید." value="#{MemberMB.baseEntity.email}" style="width:270px !important;">
+					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+				
+	
+	            <p:outputLabel for="address" value="آدرس کامل محل سکونت: " styleClass="bnazaninbold16-blue"/>
+	            <p:inputTextarea id="address" maxlength="299" value="#{MemberMB.baseEntity.address}" autoResize="false"
+	            				 required="true" requiredMessage="آدرس کامل محل سکونت باید به دقت تکمیل گردد">
+	            	<p:watermark for="address" value="شامل نام استان، نام شهر، خیابان اصلی، خیابان فرعی، کوچه، پلاک و کد پستی" />
+	            </p:inputTextarea>            
+
+	
+	
+				<h:outputLabel for="membertype" value="نوع عضو: " styleClass="bnazaninbold16-blue" />
+				<p:selectOneMenu id="membertype" value="#{MemberMB.baseEntity.membertype.id}"
+								 panelStyleClass="menupanel">
+					<f:selectItems value="#{MemberMB.FindAll_Membertype()}" var="bb"
+						itemLabel="#{bb.title}" itemValue="#{bb.id}" />
+				</p:selectOneMenu>						
+	            	         	      
+	            	         	      
+	            	         	      	            	         	      	            	         	       
+			</h:panelGrid>
+			
+			
+	        <p:spacer height="10" width="50"/>
+	        <p:commandButton  type="submit" value="ثبت / ویرایش اطلاعات" action="#{MemberMB.AddEdit()}" ajax="true" 
+	        		style="width:180px !important;" icon="ui-icon-gNew"
+	        		update=":frmDT:dtList dlgNewEdit panelgridNewEdit"  oncomplete="PF('dlgNewEdit').show();"/>
+	       
+	        &#160;&#160;&#160;&#160;
+	        <p:commandButton value="پایان عملیات / بستن فرم" oncomplete="PF('dlgNewEdit').hide();" ajax="true" 
+	        			action="#{MemberMB.setCancel()}" style="width:180px !important;" icon="ui-icon-close"
+	        			update=":frmDT:dtList dlgNewEdit panelgridNewEdit" immediate="true" process="@all"/>
+
+
+			<p:messages styleClass="bnazaninbold16-red" id="messages" showDetail="false" autoUpdate="true" closable="true" />
+		
+		</p:dialog>
+</h:form>
+
+
+
+<h:form id="frmDT">
+
+		<p:growl id="growl" showDetail="true" life="4000"/> 
+
+        <p:dataTable dir="rtl" id="dtList" widgetVar="dtList" style="width:97%;" value="#{MemberMB.baseEntityList}" var="bb"
+			        rowIndexVar="rowIndex" emptyMessage="هیچ رکوردی برای نمایش پیدا نشد" 
+			        paginator="true" rows="30" rowsPerPageTemplate="30,60,90,120" paginatorPosition="bottom"      
+			        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                         
+			        draggableColumns="true" selectionMode="single" rowKey="#{bb.id}">		
+
+
+			<f:facet name="header">
+	            <table><tr>
+	            		<td align="right"  style="border:none !important;">  
+					    	<p:commandButton oncomplete="PF('dlgNewEdit').show();" style="float:right; width:190px !important;" icon="ui-icon-gNew"  
+					    			value="اضافه کردن اطلاعات جدید" ajax="true" action="#{MemberMB.setNewRecord()}" update=":frmNewEdit"/>	            
+	            		</td>	            	
+	            		<td align="center"  style="border:none !important;">  
+				            <p:outputLabel value="مدیریت اطلاعات پایه اعضا" styleClass="btitr18-red"/>		    			    	
+	            		</td>	            	
+	            		<td align="left"  style="border:none !important;">  
+				            <p:commandLink id="p1" ajax="false">
+				                <p:graphicImage library="images" name="excel.png" width="24"/>
+				                <p:dataExporter type="xls" target="dtList" fileName="AllMembers" />
+				            </p:commandLink>	
+
+					        <p:inputText id="globalFilter" onkeyup="PF('dtList').filter()" style="float:left; width:170px !important;" placeholder="جستجو در کل فیلدها"/>	
+					        <p:commandButton id="toggler" type="button" value="انتخاب ستونها" style="float:left; width:130px !important;" icon="ui-icon-calculator" />
+					        <p:columnToggler datasource="dtList" trigger="toggler" />
+
+	            		</td>	            	
+	            </tr></table>
+		    </f:facet>
+
+
+			
+				
+			<p:column headerText="ردیف" style="width:20px;text-align:center;" styleClass="bnazaninbold14-red">
+                <p:outputLabel value="#{rowIndex+1}" styleClass="bnazanin18-red" />
+			</p:column>
+
+            <p:column headerText="کد عضو" sortBy="#{bb.mno}" filterBy="#{bb.mno}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.mno}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="نام عضو" sortBy="#{bb.name}" filterBy="#{bb.name}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.name}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="نام خانوادگی" sortBy="#{bb.family}" filterBy="#{bb.family}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.family}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="کد ملی عضو" sortBy="#{bb.mellicode}" filterBy="#{bb.mellicode}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.mellicode}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="شماره تلفن همراه" sortBy="#{bb.mobile}" filterBy="#{bb.mobile}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.mobile}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="شماره تلفن ثابت" sortBy="#{bb.phone}" filterBy="#{bb.phone}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.phone}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="پست الکترونیک" sortBy="#{bb.email}" filterBy="#{bb.email}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.email}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="آدرس کامل" sortBy="#{bb.address}" filterBy="#{bb.address}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.address}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="نوع عضویت" sortBy="#{bb.membertype.title}" filterBy="#{bb.membertype.title}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.membertype.title}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+
+			            
+
+            <p:column headerText="ویرایش" styleClass="btitr16-blue" style="width:40px !important;">
+            	<p:commandButton oncomplete="PF('dlgNewEdit').show();" icon="ui-icon-gEdit" type="submit" style="width:35px !important;" value="" 
+            		ajax="true" update=":frmNewEdit:dlgNewEdit" process="@this" action="#{MemberMB.setSelectedRow(bb)}"/>
+            </p:column>
+
+            <p:column headerText="حذف" styleClass="btitr16-red" style="width:40px !important;">
+            	<p:commandButton icon="ui-icon-gDelete" type="submit" style="width:35px !important;" value="" ajax="true" 
+            	update="@form" action="#{MemberMB.Remove(bb)}">
+            		<p:confirm header="تائید حذف رکورد انتخابی" message="آیا از حذف رکورد انتخابی مطمئن هستید؟" icon="ui-icon-alert" />
+            	</p:commandButton>
+            </p:column>			
+			
+        </p:dataTable>
+
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="bnazaninbold16-red">
+	        <p:commandButton value="بلی" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    </p:confirmDialog>
+
+
+</h:form>
+
+
+<br/><br/><br/><br/><br/><br/>
+    
+</ui:define>
+</ui:composition>

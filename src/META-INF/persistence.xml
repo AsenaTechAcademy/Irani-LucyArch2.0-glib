@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="glib">
+		<class>org.asena.AAA.Entity.Aaaccesslist</class>
+		<class>org.asena.AAA.Entity.Aaexceptionlog</class>
+		<class>org.asena.AAA.Entity.Aapage</class>
+		<class>org.asena.AAA.Entity.Aapagecat</class>
+		<class>org.asena.AAA.Entity.Aapagevisit</class>
+		<class>org.asena.AAA.Entity.Aarole</class>
+		<class>org.asena.AAA.Entity.Aasession</class>
+		<class>org.asena.AAA.Entity.Aauser</class>
+		
+		
+		<class>org.asena.glib.Entity.Amanat</class>
+		<class>org.asena.glib.Entity.Book</class>
+		<class>org.asena.glib.Entity.Member</class>
+		<class>org.asena.glib.Entity.Membertype</class>
+		
+		
+		<class>org.asena.edu.Entity.Course</class>
+		<class>org.asena.edu.Entity.Coursetype</class>
+	</persistence-unit>
+</persistence>

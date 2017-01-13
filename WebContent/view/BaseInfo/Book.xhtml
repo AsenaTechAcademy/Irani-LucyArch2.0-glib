@@ -1,0 +1,174 @@
+<ui:composition template="/templates/CPanelLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<ui:define id="content" name="content">
+<br/><br/>
+
+	 
+<h:form id="frmNewEdit">	
+		<p:dialog dir="rtl" id="dlgNewEdit" header="ثبت / ویرایش اطلاعات کتابها" widgetVar="dlgNewEdit" styleClass="btitr18-red"
+				  closable="false" width="900" height="700">				  
+					
+			<p:outputLabel value="لطفا دقت نمایید، تکمیل فیلدهای ستاره دار الزامی می باشد." styleClass="bnazaninbold16-red"/>
+			<br/>
+
+										
+	        <h:panelGrid id="panelgridNewEdit" columns="2" columnClasses="bnazaninbold16-blue">					           
+					            
+	            <p:outputLabel for="bno" value="کد کتاب (یکتا): " styleClass="bnazaninbold16-blue"/>
+	            <p:inputText rendered="#{!BookMB.isEdit}"  id="bno" maxlength="199" value="#{BookMB.baseEntity.bno}"
+	            			required="true" requiredMessage="فیلد کد کتاب نباید خالی باشد">
+	            </p:inputText>
+	            <p:outputLabel  rendered="#{BookMB.isEdit}"  value="#{BookMB.baseEntity.bno}" styleClass="bnazaninbold16-red"/>
+	            
+	            	         	          
+	            <p:outputLabel for="title" value="عنوان کتاب: " styleClass="bnazaninbold16-blue"/>
+	            <p:inputText id="title" maxlength="299" value="#{BookMB.baseEntity.title}" style="width:380px !important;"
+	               			required="true" requiredMessage="فیلد عنوان کتاب نباید خالی باشد">					           
+	            </p:inputText>
+
+	            <p:outputLabel for="author" value="نویسندگان: " styleClass="bnazaninbold16-blue"/>
+	            <p:inputText id="author" maxlength="299" value="#{BookMB.baseEntity.author}" style="width:380px !important;"
+	               			required="true" requiredMessage="فیلد نویسندگان نباید خالی باشد">					           
+	            </p:inputText>
+
+	            <p:outputLabel for="isbn" value="شابک: " styleClass="bnazaninbold16-blue"/>
+	            <p:inputText id="isbn" maxlength="299" value="#{BookMB.baseEntity.isbn}" style="width:280px !important;"
+	               			required="true" requiredMessage="فیلد شابک نباید خالی باشد">					           
+	            </p:inputText>
+
+				<p:outputLabel for="pages" value="تعداد صفحات: " styleClass="bnazaninbold16-blue" />
+	            <p:inputText id="pages" maxlength="7" value="#{BookMB.baseEntity.pages}" style="width:80px !important;"
+	               			required="true" requiredMessage="فیلد تعداد صفحات نباید خالی باشد">					           
+					<pe:keyFilter regEx="/[\d]/	" />					
+	            </p:inputText>
+
+	
+				<p:outputLabel for="isreference" value="وضعیت مرجع بودن:"  styleClass="bnazaninbold16-blue"/>
+				<p:selectOneRadio id="isreference"
+					value="#{BookMB.baseEntity.isreference}" required="true" requiredMessage="فیلد وضعیت مرجع بودن حتما باید انتخاب شود">					
+					<f:selectItem itemValue="#{true}" itemLabel="بله" />
+					<f:selectItem itemValue="#{false}" itemLabel="خیر"/>					
+				</p:selectOneRadio>
+
+			</h:panelGrid>
+			
+			
+	        <p:spacer height="10" width="50"/>
+	        <p:commandButton  type="submit" value="ثبت / ویرایش اطلاعات" action="#{BookMB.AddEdit()}" ajax="true" 
+	        		style="width:180px !important;" icon="ui-icon-gNew"
+	        		update=":frmDT:dtList dlgNewEdit panelgridNewEdit"  oncomplete="PF('dlgNewEdit').show();"/>
+	       
+	        &#160;&#160;&#160;&#160;
+	        <p:commandButton value="پایان عملیات / بستن فرم" oncomplete="PF('dlgNewEdit').hide();" ajax="true" 
+	        			action="#{BookMB.setCancel()}" style="width:180px !important;" icon="ui-icon-close"
+	        			update=":frmDT:dtList dlgNewEdit panelgridNewEdit" immediate="true" process="@all"/>
+
+
+			<p:messages styleClass="bnazaninbold16-red" id="messages" showDetail="false" autoUpdate="true" closable="true" />
+		
+		</p:dialog>
+</h:form>
+
+
+
+<h:form id="frmDT">
+
+		<p:growl id="growl" showDetail="true" life="4000"/> 
+
+        <p:dataTable dir="rtl" id="dtList" widgetVar="dtList" style="width:97%;" value="#{BookMB.baseEntityList}" var="bb"
+			        rowIndexVar="rowIndex" emptyMessage="هیچ رکوردی برای نمایش پیدا نشد" 
+			        paginator="true" rows="30" rowsPerPageTemplate="30,60,90,120" paginatorPosition="bottom"      
+			        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                         
+			        draggableColumns="true" selectionMode="single" rowKey="#{bb.id}">		
+
+
+			<f:facet name="header">
+	            <table><tr>
+	            		<td align="right"  style="border:none !important;">  
+					    	<p:commandButton oncomplete="PF('dlgNewEdit').show();" style="float:right; width:190px !important;" icon="ui-icon-gNew"  
+					    			value="اضافه کردن اطلاعات جدید" ajax="true" action="#{BookMB.setNewRecord()}" update=":frmNewEdit"/>	            
+	            		</td>	            	
+	            		<td align="center"  style="border:none !important;">  
+				            <p:outputLabel value="مدیریت اطلاعات پایه کتابها" styleClass="btitr18-red"/>		    			    	
+	            		</td>	            	
+	            		<td align="left"  style="border:none !important;">  
+				            <p:commandLink id="p1" ajax="false">
+				                <p:graphicImage library="images" name="excel.png" width="24"/>
+				                <p:dataExporter type="xls" target="dtList" fileName="AllBooks" />
+				            </p:commandLink>	
+
+					        <p:inputText id="globalFilter" onkeyup="PF('dtList').filter()" style="float:left; width:170px !important;" placeholder="جستجو در کل فیلدها"/>	
+					        <p:commandButton id="toggler" type="button" value="انتخاب ستونها" style="float:left; width:130px !important;" icon="ui-icon-calculator" />
+					        <p:columnToggler datasource="dtList" trigger="toggler" />
+
+	            		</td>	            	
+	            </tr></table>
+		    </f:facet>
+
+
+			
+				
+			<p:column headerText="ردیف" style="width:20px;text-align:center;" styleClass="bnazaninbold14-red">
+                <p:outputLabel value="#{rowIndex+1}" styleClass="btitr14-red" />
+			</p:column>
+
+            <p:column headerText="کد کتاب" sortBy="#{bb.bno}" filterBy="#{bb.bno}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.bno}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="عنوان کتاب" sortBy="#{bb.title}" filterBy="#{bb.title}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel styleClass="bnazaninbold18-blue" value="#{bb.title}" />
+            </p:column>
+
+            <p:column headerText="نویسندگان" sortBy="#{bb.author}" filterBy="#{bb.author}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel styleClass="bnazaninbold18-blue" value="#{bb.author}" />
+            </p:column>
+
+
+            <p:column headerText="شابک" sortBy="#{bb.isbn}" filterBy="#{bb.isbn}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel styleClass="bnazaninbold18-blue" value="#{bb.isbn}" />
+            </p:column>
+
+            <p:column headerText="تعداد صفحات" sortBy="#{bb.pages}" filterBy="#{bb.pages}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel styleClass="bnazaninbold18-blue" value="#{bb.pages}" />
+            </p:column>
+
+            <p:column headerText="مرجع بودن" sortBy="#{bb.isreference}" filterBy="#{bb.isreference}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel styleClass="bnazaninbold18-blue" value="#{bb.isreference}" />
+            </p:column>
+
+			            
+
+            <p:column headerText="ویرایش" styleClass="btitr16-blue" style="width:40px !important;">
+            	<p:commandButton oncomplete="PF('dlgNewEdit').show();" icon="ui-icon-gEdit" type="submit" style="width:35px !important;" value="" 
+            		ajax="true" update=":frmNewEdit:dlgNewEdit" process="@this" action="#{BookMB.setSelectedRow(bb)}"/>
+            </p:column>
+
+            <p:column headerText="حذف" styleClass="btitr16-red" style="width:40px !important;">
+            	<p:commandButton icon="ui-icon-gDelete" type="submit" style="width:35px !important;" value="" ajax="true" 
+            	update="@form" action="#{BookMB.Remove(bb)}">
+            		<p:confirm header="تائید حذف رکورد انتخابی" message="آیا از حذف رکورد انتخابی مطمئن هستید؟" icon="ui-icon-alert" />
+            	</p:commandButton>
+            </p:column>			
+			
+        </p:dataTable>
+
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="bnazaninbold16-red">
+	        <p:commandButton value="بلی" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    </p:confirmDialog>
+
+
+</h:form>
+
+
+<br/><br/><br/><br/><br/><br/>
+    
+</ui:define>
+</ui:composition>

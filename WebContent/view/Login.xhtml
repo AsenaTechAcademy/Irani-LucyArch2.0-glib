@@ -1,0 +1,84 @@
+<ui:composition template="/templates/WelcomeLayout.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui">
+     
+<ui:define name="content">
+	<br/>
+
+
+	<h:form  id="loginForm"> 
+    <center>   
+      		<p:fieldset styleClass="btitr16" legend="ورود به  سامانه های یکپارچه دانشگاه بناب"  toggleable="true" toggleSpeed="800" style="width:500px;direction: rtl">
+         		
+         		<p:messages styleClass="bnazaninbold18-red" id="messages" showDetail="false" autoUpdate="true" closable="true" />
+         		
+         		<br/>
+         		
+         		<h:panelGrid columns="2">
+            		<h:graphicImage library="images" name="password.png" /> 
+            		
+             		<table>
+ 						<tr>
+							<td>
+							   <h:outputLabel styleClass="bnazaninbold16-red" for="Username" value="نام کاربری" />
+							</td>
+               
+							<td>
+							   <table>
+							      <tr><td>							          
+							     		<p:inputText maxlength="99" id="Username" value="#{LoginMB.username}"  required="true" 
+								           	requiredMessage="فیلد نام کاربری نباید خالی باشد." styleClass="bnazaninbold18">
+								       	</p:inputText>
+									</td>
+							        <td  style="font-family: B Nazanin">
+							   		</td></tr>
+							   </table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+							        <h:outputLabel styleClass="bnazaninbold16-red" for="password" value="رمز عبور" />
+							</td>
+           
+							<td>
+				                 <table>
+				                    <tr>
+				                        <td>
+				                            <p:password maxlength="99" id="password" value="#{LoginMB.password}"  feedback="false" label="password" required="true"
+				                            requiredMessage="فیلد رمز عبور نباید خالی باشد."  styleClass="bnazaninbold18">
+				                            </p:password>
+				                       </td>
+				                       <td>
+				                       </td>
+				                     </tr>
+				                </table>
+				             </td>
+						</tr>
+
+
+					</table>
+             
+        		</h:panelGrid>
+        
+        <center>
+			<p:commandButton type="submit" value="ورود به سامانه" ajax="false" action="#{LoginMB.Login()}"/>
+        </center>
+      
+      	
+        <p align="left">
+			<p:link styleClass="bnazaninbold16-red" value="فراموشی رمز عبور" ajax="false" href="/view/AAA/LostPassword.xhtml" />
+        </p>
+		
+		      
+        
+    </p:fieldset>
+  </center>
+  </h:form>
+
+
+
+</ui:define>
+</ui:composition>

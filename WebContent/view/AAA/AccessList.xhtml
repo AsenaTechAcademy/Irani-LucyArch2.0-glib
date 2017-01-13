@@ -1,0 +1,51 @@
+<ui:composition template="/templates/CPanelLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<ui:define id="content" name="content">
+<br/><br/>
+
+<h:form id="frmDT">
+	
+	<p:fieldset legend="مدیریت سطح دسترسی نقشهای سیستم" styleClass="btitr14-blue" toggleable="true" toggleSpeed="800"
+				style="width:800px;direction: rtl">
+		
+		<br/>
+	
+		<h:outputLabel for="role" value="انتخاب نقش: " styleClass="bnazaninbold16-blue" />
+		<p:selectOneMenu id="role" value="#{AccessListMB.selectedRole.id}" panelStyleClass="menupanel"
+						valueChangeListener="#{AccessListMB.RoleChange}">						
+			<p:ajax update="checklist"/>
+			<f:selectItems value="#{AccessListMB.roleList}" var="bb" itemLabel="#{bb.name}" itemValue="#{bb.id}" />
+		</p:selectOneMenu>						
+		
+		<br/><br/>
+
+ 		
+		<p:selectManyCheckbox id="checklist" value="#{AccessListMB.selectedpageList}" layout="grid" columns="1"
+								styleClass="bnazaninbold18-red">
+        	<f:selectItems value="#{AccessListMB.pageList}" var="page" itemLabel="(#{page.aapagecat.name}):&#160;&#160; #{page.name}" itemValue="#{page.id}" />
+    	</p:selectManyCheckbox>
+
+
+
+		<br/>
+		<p:commandButton action="#{AccessListMB.Save()}" ajax="true" type="submit" value="ثبت مجوزهای دسترسی" 
+						style="margin-top:12;margin-bottom:20px" />
+		<br/>
+		<p:messages styleClass="bnazaninbold18-red" id="messages" showDetail="false" autoUpdate="true" closable="true" />
+
+
+				
+	</p:fieldset>
+
+</h:form>
+
+
+<br/><br/><br/><br/><br/><br/>
+    
+</ui:define>
+</ui:composition>

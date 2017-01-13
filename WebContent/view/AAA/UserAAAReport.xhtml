@@ -1,0 +1,107 @@
+<ui:composition template="/templates/CPanelLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:define id="content" name="content">
+<br/><br/>
+
+<style>
+	.ui-column-filter {
+    	margin-right: 15% !important;
+ 	}
+</style>
+
+<h:form id="frmNewEdit">	
+	<p:dialog dir="rtl" id="dlgNewEdit" header="گزارش کامل ورود به صفحات" widgetVar="dlgNewEdit" styleClass="btitr18-red"
+				  closable="true" width="900" height="850">				  
+
+        <p:dataTable dir="rtl" id="dtList2" style="width:90%;" value="#{UserAAAReportMB.FindAllPageVisits()}" var="bb"
+			        rowIndexVar="rowIndex" emptyMessage="هیچ رکوردی برای نمایش پیدا نشد" 
+			        paginator="true" rows="20" rowsPerPageTemplate="20,40,60,80,100" paginatorPosition="bottom"      
+			        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                         
+			        draggableColumns="true" selectionMode="single" rowKey="#{bb.id}">		
+							
+			<p:column headerText="ردیف" style="width:20px;text-align:center;" styleClass="bnazaninbold14-red">
+                <p:outputLabel value="#{rowIndex+1}" styleClass="bnazanin18-red" />
+			</p:column>
+
+            <p:column headerText="نام صفحه" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.aapage.name}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="تاریخ ورود" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel styleClass="bnazaninbold18-blue" value="#{bb.indate}" />
+            </p:column>
+
+		</p:dataTable>		
+		
+							
+	</p:dialog>
+</h:form>
+
+
+<h:form id="frmDT">
+
+        <p:outputLabel for="username" value="نام کاربری را وارد کنید: " styleClass="bnazaninbold16-blue"/>
+        <p:inputText id="username" maxlength="99" value="#{UserAAAReportMB.user.username}"
+        			required="true" requiredMessage="فیلد نام کاربری نباید خالی باشد.">
+        </p:inputText>
+        <p:commandButton type="submit" value="دریافت گزارش کاربر" action="#{UserAAAReportMB.getUserReport()}" ajax="true" 
+        		style="width:160px !important;" icon="ui-icon-search" update="dtList" process="@form"/>
+
+		<p:messages styleClass="bnazaninbold18-red" id="messages" showDetail="false" autoUpdate="true" closable="true" />
+        
+        <br/><br/>
+     		
+
+        <p:dataTable dir="rtl" id="dtList" widgetVar="dtList" style="width:40%;" value="#{UserAAAReportMB.FindAllSessions()}" var="bb"
+			        rowIndexVar="rowIndex" emptyMessage="هیچ رکوردی برای نمایش پیدا نشد" 
+			        paginator="true" rows="30" rowsPerPageTemplate="30,60,90,120" paginatorPosition="bottom"      
+			        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                         
+			        draggableColumns="true" selectionMode="single" rowKey="#{bb.id}">		
+			
+			<f:facet name="header">
+	            <table><tr>
+	            		<td align="right"  style="border:none !important;">  
+	            			<p:outputLabel value="گزارش کلیه ورود و خروجهای کاربر" styleClass="btitr18-red"/>		    			    	
+	            		</td>	            	
+	            		<td align="left"  style="border:none !important;">  
+				            <p:commandLink id="p1" ajax="false">
+				                <p:graphicImage library="images" name="excel.png" width="24"/>
+				                <p:dataExporter type="xls" target="dtList" fileName="sessionfullreport" />
+				            </p:commandLink>	
+	            		</td>	            	
+	            </tr></table>
+		    </f:facet>
+				
+			<p:column headerText="ردیف" style="width:20px;text-align:center;" styleClass="bnazaninbold14-red">
+                <p:outputLabel value="#{rowIndex+1}" styleClass="bnazanin18-red" />
+			</p:column>
+
+            <p:column headerText="تاریخ ورود" sortBy="#{bb.logindate}" filterBy="#{bb.logindate}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.logindate}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="تاریخ خروج" sortBy="#{bb.logoutdate}" filterBy="#{bb.logoutdate}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel styleClass="bnazaninbold18-blue" value="#{bb.logoutdate}" />
+            </p:column>
+
+            <p:column headerText="گزارش صفحات" styleClass="btitr14-red" style="width:80px !important;">
+            	<p:commandButton oncomplete="PF('dlgNewEdit').show();" icon="ui-icon-search" type="submit" style="width:80px !important;" 
+            	value="صفحات" ajax="true" update=":frmNewEdit:dlgNewEdit" process="@all" action="#{UserAAAReportMB.setSelectedRow(bb)}"/>
+            </p:column>
+		
+			
+        </p:dataTable>
+
+
+
+</h:form>
+
+
+<br/><br/><br/><br/><br/><br/>
+    
+</ui:define>
+</ui:composition>

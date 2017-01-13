@@ -1,0 +1,64 @@
+<ui:composition template="/templates/CPanelLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:define id="content" name="content">
+<br/><br/>
+
+<style>
+	.ui-column-filter {
+    	margin-right: 15% !important;
+ 	}
+</style>
+
+<h:form id="frmDT">
+
+		<p:growl id="growl" showDetail="true" life="2000"/> 
+
+        <p:dataTable dir="rtl" id="dtList" widgetVar="dtList" style="width:40%;" value="#{InOutReportMB.FindAllSessions()}" var="bb"
+			        rowIndexVar="rowIndex" emptyMessage="هیچ رکوردی برای نمایش پیدا نشد" 
+			        paginator="true" rows="30" rowsPerPageTemplate="30,60,90,120" paginatorPosition="bottom"      
+			        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                         
+			        draggableColumns="true" selectionMode="single" rowKey="#{bb.id}">		
+			
+			<f:facet name="header">
+	            <table><tr>
+	            		<td align="right"  style="border:none !important;">  
+	            			<p:outputLabel value="گزارش کلیه ورود و خروجهای کاربر" styleClass="btitr18-red"/>		    			    	
+	            		</td>	            	
+	            		<td align="left"  style="border:none !important;">  
+				            <p:commandLink id="p1" ajax="false">
+				                <p:graphicImage library="images" name="excel.png" width="24"/>
+				                <p:dataExporter type="xls" target="dtList" fileName="sessionreport" />
+				            </p:commandLink>	
+	            		</td>	            	
+	            </tr></table>
+		    </f:facet>
+				
+			<p:column headerText="ردیف" style="width:20px;text-align:center;" styleClass="bnazaninbold14-red">
+                <p:outputLabel value="#{rowIndex+1}" styleClass="bnazanin18-red" />
+			</p:column>
+
+            <p:column headerText="تاریخ ورود" sortBy="#{bb.logindate}" filterBy="#{bb.logindate}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.logindate}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="تاریخ خروج" sortBy="#{bb.logoutdate}" filterBy="#{bb.logoutdate}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel styleClass="bnazaninbold18-blue" value="#{bb.logoutdate}" />
+            </p:column>
+
+		
+			
+        </p:dataTable>
+
+
+
+</h:form>
+
+
+<br/><br/><br/><br/><br/><br/>
+    
+</ui:define>
+</ui:composition>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="en"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui" >
+   		
+<h:head>  
+	<title>سامانه یکپارچه کتابخانه دانشگاه بناب</title>
+	
+	<style>
+   		.ui-menuitem-text {color:blue;}
+		
+        .ui-menuitem-text
+        {
+            float: right !important;
+        }
+        .ui-menu .ui-widget-header h3
+        {
+       		font-size: 16px !important;
+		    font-family:btitr !important;
+			color:RGB(170,0,0)  !important;
+            float: right !important;
+        }
+        
+        
+	</style>
+	
+</h:head>
+
+<h:body>
+<h:form>
+	<f:event listener="#{LoadPageMB.checkPageAccess()}" type="preRenderView"/>  
+		
+	<p:menu model="#{LoadPageMB.userMenu}" styleClass="LeftMenupanelMenu"/>
+
+			
+</h:form>
+</h:body>
+</html>

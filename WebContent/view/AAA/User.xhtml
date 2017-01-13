@@ -1,0 +1,161 @@
+<ui:composition template="/templates/CPanelLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<ui:define id="content" name="content">
+<br/><br/>
+
+	
+<h:form id="frmNewEdit">	
+		<p:dialog dir="rtl" id="dlgNewEdit" header="ثبت / ویرایش اطلاعات کاربران سیستم" widgetVar="dlgNewEdit" styleClass="btitr18-red"
+				  closable="false" width="750" height="500">				  
+					
+			<p:outputLabel value="لطفا دقت نمایید، تکمیل فیلدهای ستاره دار الزامی می باشد" styleClass="bnazaninbold16-red"/>							
+	        <br/>
+	        <p:outputLabel value="نام کاربری در زمان ثبت نباید تکراری باشد و در حین ویرایش نیز قابل تغییر نیست" styleClass="bnazaninbold16-red"/>							
+	        <br/>
+	        <p:outputLabel value="بعد از ایجاد کاربر جدید، رمز عبور کاربر به تلفن همراه وی فرستاده خواهد شد" styleClass="bnazaninbold16-red"/>							
+	        <br/>
+	        
+	        <h:panelGrid id="panelgridNewEdit" columns="2" columnClasses="bnazaninbold16-blue">					           
+					            
+	            <p:outputLabel for="username" value="نام کاربری: " styleClass="bnazaninbold16-blue"/>
+	            <p:inputText rendered="#{!UserMB.isEdit}" id="username" maxlength="99" value="#{UserMB.user.username}"
+	            			required="true" requiredMessage="فیلد نام کاربری نباید خالی باشد.">
+	            </p:inputText>
+	            <p:outputLabel  rendered="#{UserMB.isEdit}"  value="#{UserMB.user.username}" styleClass="bnazaninbold16-red"/>
+	            
+	            	            
+
+	            <p:outputLabel for="nickname" value="نام کاربر: " styleClass="bnazaninbold16-blue"/>
+	            <p:inputText id="nickname" maxlength="99" value="#{UserMB.user.nickname}"
+	            			required="true" requiredMessage="فیلد نام کاربر نباید خالی باشد.">
+	            </p:inputText>
+
+
+				<p:outputLabel for="mobile" value="شماره تلفن همراه:" styleClass="bnazaninbold16-blue" />
+				<p:inputMask maxlength="11" id="mobile" value="#{UserMB.user.mobile}" label="mobile" mask="99999999999" required="true"
+					styleClass="bnazaninbold18" requiredMessage="فيلد شماره تلفن همراه نبايد خالي باشد.">
+				</p:inputMask>
+
+
+
+				<h:outputLabel for="email" value="پست الکترونیک:" styleClass="bnazaninbold16-blue" />
+				<p:inputText id="email" required="true" size="40" requiredMessage="فيلد پست الکترونیک نبايد خالي باشد."
+					validatorMessage="فرمت پست الکترونیک را درست وارد کنید." value="#{UserMB.user.email}" style="width:270px !important;">
+					<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+				</p:inputText>
+
+
+				<h:outputLabel for="role" value="انتخاب نقش کاربر:" styleClass="bnazaninbold16-blue" />
+				<p:selectOneMenu id="role" value="#{UserMB.user.aarole.id}"  panelStyleClass="menupanel">
+					<f:selectItems value="#{UserMB.FindAll_Aarole()}" var="bb"
+						itemLabel="#{bb.name}" itemValue="#{bb.id}" />
+				</p:selectOneMenu>						
+
+	            
+				<br/>
+				
+			</h:panelGrid>
+			
+			
+	        <p:spacer height="10" width="50"/>
+	        <p:commandButton  type="submit" value="ثبت / ویرایش اطلاعات" action="#{UserMB.AddEdit()}" ajax="true" 
+	        		style="width:180px !important;" icon="ui-icon-gNew"/>
+	       
+	        &#160;&#160;&#160;&#160;
+	        <p:commandButton value="پایان عملیات / بستن فرم" oncomplete="PF('dlgNewEdit').hide();" ajax="true" action="#{UserMB.setCancel()}"
+	        		style="width:180px !important;" update=":frmDT:dtList dlgNewEdit panelgridNewEdit" immediate="true" icon="ui-icon-close"/>
+
+
+			<p:messages styleClass="bnazaninbold16-red" id="messages" showDetail="false" autoUpdate="true" closable="true" />
+		
+		</p:dialog>
+</h:form>
+
+
+
+<h:form id="frmDT">
+
+		<p:growl id="growl" showDetail="true" life="2000"/> 
+
+        <p:dataTable dir="rtl" id="dtList" widgetVar="dtList" style="width:80%;" value="#{UserMB.userList}" var="bb"
+			        rowIndexVar="rowIndex" emptyMessage="هیچ رکوردی برای نمایش پیدا نشد" 
+			        paginator="true" rows="30" rowsPerPageTemplate="30,60,90,120" paginatorPosition="bottom"      
+			        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                         
+			        draggableColumns="true" selectionMode="single" rowKey="#{bb.id}">		
+			
+			<f:facet name="header">
+	            <table><tr>
+	            		<td align="right"  style="border:none !important;">  
+					    	<p:commandButton oncomplete="PF('dlgNewEdit').show();" style="float:right; width:200px !important;" icon="ui-icon-gNew"  
+					    			value="اضافه کردن اطلاعات جدید" ajax="true" action="#{UserMB.setNewRecord()}" update=":frmNewEdit"/>	            
+	            		</td>	            	
+	            		<td align="center"  style="border:none !important;">  
+	            			<p:outputLabel value="مدیریت اطلاعات کاربران سیستم" styleClass="btitr18-red"/>		    			    	
+	            		</td>	            	
+	            		<td align="left"  style="border:none !important;">  
+				            <p:commandLink id="p1" ajax="false">
+				                <p:graphicImage library="images" name="excel.png" width="24"/>
+				                <p:dataExporter type="xls" target="dtList" fileName="users" />
+				            </p:commandLink>	
+	            		</td>	            	
+	            </tr></table>
+		    </f:facet>
+				
+			<p:column headerText="ردیف" style="width:20px;text-align:center;" styleClass="bnazaninbold14-red">
+                <p:outputLabel value="#{rowIndex+1}" styleClass="bnazanin18-red" />
+			</p:column>
+
+            <p:column headerText="نام کاربری" sortBy="#{bb.username}" filterBy="#{bb.username}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.username}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="نقش کاربری" sortBy="#{bb.aarole.name}" filterBy="#{bb.aarole.name}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.aarole.name} -- #{bb.aarole.enname}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="نام کاربر" sortBy="#{bb.nickname}" filterBy="#{bb.nickname}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.nickname}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="شماره همراه" sortBy="#{bb.mobile}" filterBy="#{bb.mobile}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.mobile}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="پست الکترونیک" sortBy="#{bb.email}" filterBy="#{bb.email}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel styleClass="bnazaninbold18-blue" value="#{bb.email}" />
+            </p:column>
+			            
+
+            <p:column headerText="ویرایش" styleClass="btitr16-blue" style="width:40px !important;">
+            	<p:commandButton oncomplete="PF('dlgNewEdit').show();" icon="ui-icon-gEdit" type="submit" style="width:35px !important;" value="" 
+            		ajax="true" update=":frmNewEdit:dlgNewEdit" process="@this" action="#{UserMB.setSelectedRow(bb)}"/>
+            </p:column>
+
+            <p:column headerText="حذف" styleClass="btitr16-red" style="width:40px !important;">
+            	<p:commandButton icon="ui-icon-gDelete" type="submit" style="width:35px !important;" value="" ajax="true" 
+            	update="@form" action="#{UserMB.Remove(bb)}">
+            		<p:confirm header="تائید حذف رکورد انتخابی" message="آیا از حذف رکورد انتخابی مطمئن هستید؟" icon="ui-icon-alert" />
+            	</p:commandButton>
+            </p:column>			
+			
+        </p:dataTable>
+
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="bnazaninbold16-red">
+	        <p:commandButton value="بلی" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    </p:confirmDialog>
+
+
+</h:form>
+
+
+<br/><br/><br/><br/><br/><br/>
+    
+</ui:define>
+</ui:composition>

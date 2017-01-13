@@ -1,0 +1,138 @@
+<ui:composition template="/templates/CPanelLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<ui:define id="content" name="content">
+<br/><br/>
+
+	
+<h:form id="frmNewEdit">	
+		<p:dialog dir="rtl" id="dlgNewEdit" header="ثبت / ویرایش اطلاعات نقشهای سیستم" widgetVar="dlgNewEdit" styleClass="btitr18-red"
+				  closable="false" width="700" height="450">				  
+					
+			<p:outputLabel value="لطفا دقت نمایید، تکمیل فیلدهای ستاره دار الزامی می باشد" styleClass="bnazaninbold16-red"/>							
+	        <h:panelGrid id="panelgridNewEdit" columns="2" columnClasses="bnazaninbold16-blue">					           
+					            
+	            <p:outputLabel for="name" value="نام نقش: " styleClass="bnazaninbold16-blue"/>
+	            <p:inputText id="name" maxlength="99" value="#{RoleMB.role.name}"
+	            			required="true" requiredMessage="فیلد نام نقش نباید خالی باشد">
+	            </p:inputText>
+	            
+	            <p:outputLabel for="enname" value="نام انگلیسی نقش: " styleClass="bnazaninbold16-blue"/>
+	            <p:inputText id="enname" maxlength="99" value="#{RoleMB.role.enname}"
+	            			required="true" requiredMessage="فیلد نام نقش نباید خالی باشد">
+	            </p:inputText>
+	            
+	            	
+	            <p:outputLabel for="maxuser" value="حداکثر کاربر (نامحدود 1-): " styleClass="bnazaninbold16-blue"/>
+	            <p:inputMask dir="ltr" maxlength="10" id="maxuser"  value="#{RoleMB.role.maxuser}" style="width:70px !important;"
+	            			required="true" requiredMessage="حداکثر کاربر نباید خالی باشد" validatorMessage="فقط یک رقم میتواند باشد">
+	            			<pe:keyFilter regEx="/[\d\-]/" />
+	            </p:inputMask>
+	
+	            <p:outputLabel for="description" value="شرح نقش: " styleClass="bnazaninbold16-blue"/>
+	            <p:inputTextarea id="description" maxlength="299" value="#{RoleMB.role.description}" autoResize="false">
+	            </p:inputTextarea>            
+	
+
+				<br/>
+				
+			</h:panelGrid>
+			
+			
+	        <p:spacer height="10" width="50"/>
+	        <p:commandButton  type="submit" value="ثبت / ویرایش اطلاعات" action="#{RoleMB.AddEdit()}" ajax="true" 
+	        		style="width:180px !important;" icon="ui-icon-gNew"/>
+	       
+	        &#160;&#160;&#160;&#160;
+	        <p:commandButton value="پایان عملیات / بستن فرم" oncomplete="PF('dlgNewEdit').hide();" ajax="true" action="#{RoleMB.setCancel()}"
+	        		style="width:180px !important;" update=":frmDT:dtList dlgNewEdit panelgridNewEdit" immediate="true" icon="ui-icon-close"/>
+
+
+			<p:messages styleClass="bnazaninbold16-red" id="messages" showDetail="false" autoUpdate="true" closable="true" />
+		
+		</p:dialog>
+</h:form>
+
+
+
+<h:form id="frmDT">
+
+		<p:growl id="growl" showDetail="true" life="2000"/> 
+
+        <p:dataTable dir="rtl" id="dtList" widgetVar="dtList" style="width:70%;" value="#{RoleMB.roleList}" var="bb"
+			        rowIndexVar="rowIndex" emptyMessage="هیچ رکوردی برای نمایش پیدا نشد" 
+			        paginator="true" rows="30" rowsPerPageTemplate="30,60,90,120" paginatorPosition="bottom"      
+			        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"                         
+			        draggableColumns="true" selectionMode="single" rowKey="#{bb.id}">		
+			
+			<f:facet name="header">
+	            <table><tr>
+	            		<td align="right"  style="border:none !important;">  
+					    	<p:commandButton oncomplete="PF('dlgNewEdit').show();" style="float:right; width:200px !important;" icon="ui-icon-gNew"  
+					    			value="اضافه کردن اطلاعات جدید" ajax="true" action="#{RoleMB.setNewRecord()}" update=":frmNewEdit"/>	            
+	            		</td>	            	
+	            		<td align="center"  style="border:none !important;">  
+				            <p:outputLabel value="مدیریت اطلاعات نقشهای سیستم" styleClass="btitr18-red"/>		    			    	
+	            		</td>	            	
+	            		<td align="left"  style="border:none !important;">  
+				            <p:commandLink id="p1" ajax="false">
+				                <p:graphicImage library="images" name="excel.png" width="24"/>
+				                <p:dataExporter type="xls" target="dtList" fileName="roles" />
+				            </p:commandLink>	
+	            		</td>	            	
+	            </tr></table>
+		    </f:facet>
+				
+			<p:column headerText="ردیف" style="width:20px;text-align:center;" styleClass="bnazaninbold14-red">
+                <p:outputLabel value="#{rowIndex+1}" styleClass="bnazanin18-red" />
+			</p:column>
+
+            <p:column headerText="نام نقش" sortBy="#{bb.name}" filterBy="#{bb.name}" filterMatchMode="contains" style="width:200px !important;text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.name}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="نام انگلیسی نقش" sortBy="#{bb.enname}" filterBy="#{bb.enname}" filterMatchMode="contains" style="width:200px !important;text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel value="#{bb.enname}" styleClass="bnazaninbold18-blue"/>
+            </p:column>
+
+            <p:column headerText="حداکثر کاربر" sortBy="#{bb.maxuser}" filterBy="#{bb.maxuser}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel styleClass="bnazaninbold18-blue" value="#{(bb.maxuser==-1) ? 'نامحدود' : bb.maxuser}" />
+            </p:column>
+
+            <p:column headerText="شرح نقش" sortBy="#{bb.description}" filterBy="#{bb.description}" filterMatchMode="contains" style="text-align: center;" styleClass="btitr16-blue">
+                <p:outputLabel styleClass="bnazaninbold18-blue" value="#{bb.description}" />
+            </p:column>
+
+
+            <p:column headerText="ویرایش" styleClass="btitr16-blue" style="width:40px !important;">
+            	<p:commandButton oncomplete="PF('dlgNewEdit').show();" icon="ui-icon-gEdit" type="submit" style="width:35px !important;" value="" 
+            		ajax="true" update=":frmNewEdit:dlgNewEdit" process="@this" action="#{RoleMB.setSelectedRow(bb)}"/>
+            </p:column>
+
+            <p:column headerText="حذف" styleClass="btitr16-red" style="width:40px !important;">
+            	<p:commandButton icon="ui-icon-gDelete" type="submit" style="width:35px !important;" value="" ajax="true" 
+            	update="@form" action="#{RoleMB.Remove(bb)}">
+            		<p:confirm header="تائید حذف رکورد انتخابی" message="آیا از حذف رکورد انتخابی مطمئن هستید؟" icon="ui-icon-alert" />
+            	</p:commandButton>
+            </p:column>			
+			
+        </p:dataTable>
+
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="bnazaninbold16-red">
+	        <p:commandButton value="بلی" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	        <p:commandButton value="خیر" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	    </p:confirmDialog>
+
+
+</h:form>
+
+
+<br/><br/><br/><br/><br/><br/>
+    
+</ui:define>
+</ui:composition>

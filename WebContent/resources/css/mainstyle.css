@@ -1,0 +1,444 @@
+@font-face {
+    font-family:'bnazanin';
+    src:local('B Nazanin'),
+        local('BNazanin');
+    src:url("#{resource['css:fonts/BNazanin.eot']}"),
+        url("#{resource['css:fonts/BNazanin.eot']}?#iefix") format('embedded-opentype'),
+        url("#{resource['css:fonts/BNazanin.woff']}") format('woff'),
+        url("#{resource['css:fonts/BNazanin.ttf']}") format('truetype');
+}
+@font-face {
+    font-family:'btitr';
+    src:local('B Titr'),
+        local('BTitr');
+    src:url("#{resource['css:fonts/BTitrBold.eot']}"),
+        url("#{resource['css:fonts/BTitrBold.eot']}?#iefix") format('embedded-opentype'),
+        url("#{resource['css:fonts/BTitrBold.woff']}") format('woff'),
+        url("#{resource['css:fonts/BTitrBold.ttf']}") format('truetype');
+}
+@font-face {
+    font-family:'bkoodak';
+    src:local('B Koodak'),
+        local('BKoodak');
+    src:url("#{resource['css:fonts/BKoodakBold.eot']}"),
+        url("#{resource['css:fonts/BKoodakBold.eot']}?#iefix") format('embedded-opentype'),
+        url("#{resource['css:fonts/BKoodakBold.woff']}") format('woff'),
+        url("#{resource['css:fonts/BKoodakBold.ttf']}") format('truetype');
+}
+.menupanel .ui-selectonemenu-list { 
+    background: RGB(250,220,220) ;
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 16px  !important;
+	color:RGB(0,0,256)  !important;
+	font-weight: bold  !important;
+}
+
+.ui-growl-title {
+    font: 15px "btitr";
+    color:red;
+    text-align: center;
+}
+.ui-growl-message p {
+    font: 20px "btitr";
+    letter-spacing: -1px;
+}
+
+.ui-icon-gDelete{
+    background-image: url("#{resource['images/delete.png']}") !important;
+}	
+.ui-icon-gEdit{
+    background-image: url("#{resource['images/edit.png']}") !important;
+}	
+.ui-icon-gNew{
+    background-image: url("#{resource['images/new.png']}") !important;
+}	
+
+.glayoutUnit {
+   background: RGB(235,234,225);margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important; border:none  !important;
+}
+.glayoutUnit .ui-layout-unit-content {
+   background: RGB(235,234,225);margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important; border:none  !important;
+}
+
+.glayoutUnitCenter {
+   background: RGB(235,234,225);margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important; border:none  !important;
+}
+.glayoutUnitCenter .ui-layout-unit-content {
+   background: RGB(235,234,225);margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important; border:none  !important;
+}
+
+.glayoutUnitLeftMenu {
+   background: RGB(25,208,175);margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important; border:none  !important;
+}
+.glayoutUnitLeftMenu .ui-layout-unit-content {
+   background: RGB(240,238,237);margin: 0px 0px 0px 0px !important; padding: 0px 0px 0px 0px !important; border:none  !important;
+}
+
+.LeftMenupanelMenu
+{
+	width:209px ; margin-top:15;  margin-left:10 ;  margin-right:10;
+}
+.LeftMenupanelMenusub
+{
+	background: RGB(230,228,227) !important;
+} 
+.LeftMenumenuitem
+{
+	font-family: bnazanin,Times New Roman, sans-serif; font-size: 15px;  font-weight: bold !important;
+}
+.LeftMenumenuitemsub
+{
+	font-family: bnazanin,Times New Roman, sans-serif; font-size: 15px; 
+}
+
+
+table.header {
+	background-color: RGB(25,95,190);  height: 100%; width:100%;border:none;margin:0px;padding: 0px;
+}
+span.header{
+		text-align: center;
+	font-family: btitr,Times New Roman, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	color:RGB(255,255,255);
+	
+}
+
+table.header2 {
+	text-align: right; width:300px; border:none;margin:0px;
+	font-family: bnazanin,Times New Roman, sans-serif;
+	font-size: 16px;
+	color:RGB(255,255,255);
+	padding: 0px;
+	font-weight: normal;
+	
+}
+
+table.footer { 
+	background-color: RGB(200,220,250);  height: 100%; width:100%;
+	text-align: right;
+	font-family: bkoodak,Times New Roman, sans-serif;
+	font-size: 12px;
+	color:RGB(255,255,255);
+	padding: 0px;
+	}
+	
+span.footer { 
+	font-family: bkoodak,Times New Roman, sans-serif;
+	font-size: 11px;
+	color:RGB(255,255,255);
+	}
+
+.gTable	
+{
+	font-family: bnazanin,Times New Roman, sans-serif;
+	font-size: 18px;
+	color:RGB(10,10,10);
+	font-weight: bold;
+	
+}
+
+a.riz:link {
+	font-family: bnazanin,Times New Roman, sans-serif;
+	font-size: 16px;
+	font-weight: normal;
+	text-decoration: none;
+    color: white;
+}
+
+a.riz:visited {
+    text-decoration: none;
+    color: white;
+}
+
+a.riz:hover {
+    text-decoration: none;
+	font-family: bnazanin,Times New Roman, sans-serif;
+	font-size: 16px;
+	background-color: RGB(120,150,175);
+}
+
+a.riz:active {
+    text-decoration: none;
+    color: white;
+}
+
+.bnazaninbold18 { 
+	font-family: bnazanin,Times New Roman, sans-serif!important;
+	font-size: 18px !important;
+	color:RGB(0,0,0) !important;
+	font-weight: bold !important;
+	}
+
+.bnazanin18 { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 18px  !important;
+	color:RGB(0,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.bnazaninbold16 { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 16px  !important;
+	color:RGB(0,0,0)  !important;
+	font-weight: bold  !important;
+	}
+
+.bnazanin16 { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 16px  !important;
+	color:RGB(0,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.bnazaninbold14 { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 14px  !important;
+	color:RGB(0,0,0)  !important;
+	font-weight: bold  !important;
+	}
+
+.bnazanin14 { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 14px  !important;
+	color:RGB(0,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr20 { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 20px  !important;
+	color:RGB(0,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr18 { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 18px  !important;
+	color:RGB(0,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr16 { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 16px  !important;
+	color:RGB(0,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr14 { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 14px  !important;
+	color:RGB(0,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr12 { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 12px  !important;
+	color:RGB(0,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.bnazaninbold18-blue { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 18px  !important;
+	color:RGB(0,0,210)  !important;
+	font-weight: bold  !important;
+	}
+
+.bnazanin18-blue { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 18px  !important;
+	color:RGB(0,0,210)  !important;
+	font-weight: normal  !important;
+	}
+
+.bnazaninbold16-blue { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 16px  !important;
+	color:RGB(0,0,210)  !important;
+	font-weight: bold  !important;
+	}
+
+.bnazanin16-blue { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 16px  !important;
+	color:RGB(0,0,210)  !important;
+	font-weight: normal  !important;
+	}
+
+.bnazaninbold14-blue { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 14px  !important;
+	color:RGB(0,0,210)  !important;
+	font-weight: bold  !important;
+	}
+
+.bnazanin14-blue { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 14px  !important;
+	color:RGB(0,0,210)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr20-blue { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 20px  !important;
+	color:RGB(0,0,210)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr18-blue { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 18px  !important;
+	color:RGB(0,0,210)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr16-blue { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 16px  !important;
+	color:RGB(0,0,210)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr14-blue { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 14px  !important;
+	color:RGB(0,0,210)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr12-blue { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 12px  !important;
+	color:RGB(0,0,210)  !important;
+	font-weight: normal  !important;
+	}
+
+.bnazaninbold18-red { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 18px  !important;
+	color:RGB(170,0,0)  !important;
+	font-weight: bold  !important;
+	}
+
+.bnazanin18-red { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 18px  !important;
+	color:RGB(170,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.bnazaninbold16-red { 
+	font-family: bnazanin, Times New Roman, sans-serif  !important;
+	font-size: 16px  !important;
+	color:RGB(170,0,0)  !important;
+	font-weight: bold  !important;
+	}
+
+.bnazanin16-red { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 16px  !important;
+	color:RGB(170,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.bnazaninbold14-red { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 14px  !important;
+	color:RGB(170,0,0)  !important;
+	font-weight: bold  !important;
+	}
+
+.bnazanin14-red { 
+	font-family: bnazanin,Times New Roman, sans-serif !important;
+	font-size: 14px  !important;
+	color:RGB(170,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr20-red { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 20px  !important;
+	color:RGB(170,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr18-red { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 18px  !important;
+	color:RGB(170,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr16-red { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 16px  !important;
+	color:RGB(170,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr14-red { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 14px  !important;
+	color:RGB(170,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+.btitr12-red { 
+	font-family: btitr,Times New Roman, sans-serif !important;
+	font-size: 12px  !important;
+	color:RGB(170,0,0)  !important;
+	font-weight: normal  !important;
+	}
+
+
+.ui-inputfield {
+	font-family: bkoodak,'Georgia', sans-serif  !important;
+	font-size: 16px  !important;
+	color:RGB(170,0,50)  !important;
+	font-weight: normal  !important;
+    margin: 0 !important;
+    outline: medium none !important;
+    padding: 1px 1px 1px 1px  !important;
+    width:170px !important;
+    height:25px  !important;
+}
+
+.ui-inputtextarea {
+	font-family: bkoodak,'Georgia', sans-serif  !important;
+	font-size: 16px  !important;
+	color:RGB(170,0,50)  !important;
+	font-weight: normal  !important;
+    margin: 0 !important;
+    outline: medium none !important;
+    padding: 1px 1px 1px 1px  !important;
+    width:250px !important;
+    height:100px  !important;    
+}
+
+.ui-button
+{
+	width:160px  !important;
+	height:35px  !important;
+}
+
+.ui-button-text
+{
+	font-family: bnazanin,'Times', sans-serif  !important;
+	font-size: 16px  !important;
+	font-weight: bold  !important;
+	color:RGB(0,0,170)  !important;
+}
+
+.ui-outputlabel-rfi
+{
+	font-family: bkoodak,Times New Roman, sans-serif !important;
+	font-size: 15px  !important;
+	color:RGB(170,0,50)  !important;
+	font-weight: normal  !important;
+}
+
+

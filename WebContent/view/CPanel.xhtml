@@ -1,0 +1,49 @@
+<ui:composition template="/templates/CPanelLayout.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui">
+     
+<ui:define name="content">
+ 
+	<h:form>
+	<br/>
+       	<h:panelGrid columns="1">
+       		 <p:outputLabel styleClass="btitr16-red">
+				  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;کاربر گرامی به سامانه یکپارچه کتابخانه دانشگاه بناب خوش آمدید
+			</p:outputLabel>				
+       	</h:panelGrid>
+
+
+	<br /><br /><br /><br />
+	<p:fieldset legend="اطلاعات کاربری شما در سیستم" styleClass="btitr14-blue" toggleable="true" toggleSpeed="800"
+				style="width:700px;direction: rtl">
+		
+		<h:panelGrid columns="2">
+				<p:outputLabel value="نام کاربری شما : " styleClass="bnazaninbold16-blue"/>
+				<p:outputLabel value="#{ChangeProfileMB.profileUIModel.username}" styleClass="bnazaninbold16-red"/>
+
+				<p:outputLabel value="نقش کاربری شما : " styleClass="bnazaninbold16-blue"/>
+				<p:outputLabel value="#{ChangeProfileMB.profileUIModel.role}" styleClass="bnazaninbold16-red"/>
+		
+				<p:outputLabel value="شماره تلفن همراه : " styleClass="bnazaninbold16-blue"/>
+				<p:outputLabel value="#{ChangeProfileMB.profileUIModel.mobile}" styleClass="bnazaninbold16-red"/>
+		
+				<p:outputLabel value="پست الکترونیک: " styleClass="bnazaninbold16-blue"/>
+				<p:outputLabel value="#{ChangeProfileMB.profileUIModel.email}" styleClass="bnazaninbold16-red"/>
+
+				<p:outputLabel value="تاریخ و ساعت ورود به سیستم: " styleClass="bnazaninbold16-blue"/>
+				<p:outputLabel value="#{ChangeProfileMB.profileUIModel.logindate}" styleClass="bnazaninbold16-red"/>
+
+				<p:outputLabel value="تاریخ آخرین ورود و خروج : " styleClass="bnazaninbold16-blue"/>
+				<p:outputLabel value="#{ChangeProfileMB.profileUIModel.lastlogindate}" styleClass="bnazaninbold16-red"/>
+		
+				<p:outputLabel value="تعداد کل ورود و خروج به سیستم: " styleClass="bnazaninbold16-blue"/>
+				<p:outputLabel value="#{ChangeProfileMB.profileUIModel.logincount}" styleClass="bnazaninbold16-red"/>
+		</h:panelGrid>
+	</p:fieldset>
+
+		</h:form>
+</ui:define>
+</ui:composition>

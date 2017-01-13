@@ -1,0 +1,83 @@
+<ui:composition template="/templates/Welcomelayout.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui">
+     
+<ui:define name="content">
+<br/>
+
+<h:form>
+ 
+		<p:fieldset legend="ثبت نام اولیه برای عضویت در کتابخانه" style="margin-bottom:20px;width:800px" styleClass="btitr14-blue">
+
+		<br/>
+       <h:panelGrid id="panel" columns="3" cellpadding="2">
+
+                <h:outputLabel for="codemeli" value="کد ملی (بدون صفرهای اول آن):" styleClass="bnazaninbold18"/>
+                <p:inputText maxlength="10" id="codemeli" value="#{PRegistrationMB.studentbase.mellicode}"  label="codemeli"
+                 required="true" styleClass="bnazaninbold18" requiredMessage="اين فيلد نبايد خالي باشد">
+                 <p:ajax update="msgncodemeli" event="change" />
+                </p:inputText>
+                <p:message for="codemeli" id="msgncodemeli" event="change" validateClient="true" style="margin-right:10px" />
+                
+                <h:outputLabel for="pno" value="شماره پرونده (فقط 6 رقم):  " styleClass="bnazaninbold18"/>
+                <p:inputMask maxlength="6" id="pno" value="#{PRegistrationMB.studentbase.pno}"  label="pno" mask="999999"
+                 required="true" styleClass="bnazaninbold18" requiredMessage="اين فيلد نبايد خالي باشد">
+                 <p:ajax update="msgnpno" event="change" />
+                </p:inputMask>
+                <p:message for="pno" id="msgnpno" event="change" validateClient="true" style="margin-right:10px" />
+           
+                <h:outputLabel for="stdno" value="شماره داوطلب (فقط 6 رقم):  " styleClass="bnazaninbold18"/>
+                <p:inputMask maxlength="6" id="stdno" value="#{PRegistrationMB.studentbase.stdno}"  label="stdno" mask="999999"
+                 required="true" styleClass="bnazaninbold18" requiredMessage="اين فيلد نبايد خالي باشد">
+                 <p:ajax update="msgnstdno" event="change" />
+                </p:inputMask>
+                <p:message for="stdno" id="msgnstdno" event="change" validateClient="true" style="margin-right:10px" />
+
+                <h:outputLabel for="birthyear" value="سال تولد (فقط 2 رقم):  " styleClass="bnazaninbold18"/>
+                <p:inputMask maxlength="2" id="birthyear" value="#{PRegistrationMB.studentbase.birthyear}"  label="stdno" mask="99"
+                 required="true" styleClass="bnazaninbold18" requiredMessage="اين فيلد نبايد خالي باشد">
+                 <p:ajax update="msgnbirthyear" event="change" />
+                </p:inputMask>
+                <p:message for="birthyear" id="msgnbirthyear" event="change" validateClient="true" style="margin-right:10px" />
+
+
+                            
+
+            <center>
+					<p:commandButton id="btn" type="submit" value="ثبت نام اولیه" action="#{PRegistrationMB.register}" ajax="false" />
+			</center>
+
+             </h:panelGrid>
+ 			
+
+			<br/>
+ 			<h:panelGrid id="msg2" columns="1" cellpadding="2" rendered="#{PRegistrationMB.msg.length()>0}">
+	            <p:outputLabel styleClass="btitr18-red">
+	            	#{PRegistrationMB.msg}
+				</p:outputLabel>
+			</h:panelGrid>
+ 			<h:panelGrid id="msg3" columns="2" cellpadding="2" rendered="#{PRegistrationMB.username.length()>0}">	             
+	            <p:outputLabel styleClass="bnazaninbold18-red"> #{PRegistrationMB.username} </p:outputLabel>	            
+	            <p:outputLabel styleClass="bnazaninbold16-blue"> :Username </p:outputLabel>
+	            <p:outputLabel styleClass="bnazaninbold18-red"> #{PRegistrationMB.password} </p:outputLabel>
+	            <p:outputLabel styleClass="bnazaninbold16-blue"> :Password </p:outputLabel>
+	            
+	            <br/>
+	            <a href="http://edu.bonabu.ac.ir/News/549/" target="_blank"> ورود به سیستم ثبت نام آنلاین </a>
+	            
+			</h:panelGrid>
+
+
+
+                
+
+     </p:fieldset>
+     </h:form>   
+
+	
+
+</ui:define>
+</ui:composition>

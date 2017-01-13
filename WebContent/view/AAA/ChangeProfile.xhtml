@@ -1,0 +1,64 @@
+
+<ui:composition template="/templates/CPanelLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="content">
+	<br />
+	
+<h:form>
+
+		<p:fieldset legend="تغییر اطلاعات کاربری" styleClass="btitr14-blue"
+			toggleable="true" toggleSpeed="800"
+			style="width:800px;direction: rtl">
+			
+			<p:messages styleClass="bnazaninbold18-red" id="messages" showDetail="false" autoUpdate="true" closable="true" />
+			<br/>
+
+			<h:panelGrid id="panel" columns="3">
+
+
+					<h:outputLabel for="mobile" value="شماره تلفن همراه:"
+						styleClass="bnazaninbold18" />
+					<p:inputMask style="width:250px !important;" maxlength="11"
+						id="mobile" value="#{ChangeProfileMB.profileUIModel.mobile}"
+						label="mobile" mask="99999999999" required="true"
+						styleClass="bnazaninbold18" requiredMessage="فيلد شماره تلفن همراه نبايد خالي باشد"
+						validatorMessage="مقدار اين فيلد  بايد  مانند 09143335555 باشد">
+					</p:inputMask>
+					<p:watermark for="mobile" value="تلفن همراه مانند 09145554187" />
+
+
+
+					<h:outputLabel for="email" value="پست الکترونیک:"
+						styleClass="bnazaninbold18" />
+					<p:inputText style="width:250px !important;" id="email"
+						required="true" size="40" requiredMessage="فيلد پست الکترونیک نبايد خالي باشد"
+						validatorMessage="فرمت پست الکترونیک را درست وارد کنید"
+						value="#{ChangeProfileMB.profileUIModel.email}">
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
+					<p:watermark for="email" value=" مانند ali@gmail.com" />
+
+
+
+				</h:panelGrid>
+
+
+			<br />
+			<center>
+				<p:commandButton ajax="false" type="submit" value="تغییر اطلاعات کاربری"
+					action="#{ChangeProfileMB.ChangeProfile()}"
+					style="margin-top:12;margin-bottom:20px" />
+			</center>
+
+		</p:fieldset>
+</h:form>
+
+
+
+	</ui:define>
+</ui:composition>

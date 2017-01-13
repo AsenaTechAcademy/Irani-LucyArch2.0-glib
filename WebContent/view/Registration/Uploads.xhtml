@@ -1,0 +1,61 @@
+<ui:composition template="/templates/Mainlayout.xhtml"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui">
+     
+<ui:define name="content">
+<f:event listener="#{LoadPage.Load('Uploads.xhtml')}" type="preRenderView"/>  
+
+<h:form id="upform"><br/>
+
+<h:outputLabel value="ابتدا با زدن دکمه Choose فایل مورد نظر را انتخاب کنید"  styleClass="bnazaninbold18-blue" /><br/>
+<h:outputLabel value="بعد از انتخاب فایل با زدن دکمه Upload آنرا آپلود نمائید"  styleClass="bnazaninbold18-blue" /><br/>
+<h:outputLabel value="با آپلود مجدد یک فایل، فایل قبلی آپلود شده از همان بخش پاک خواهد شد"  styleClass="bnazaninbold18-blue" /><br/>
+<h:outputLabel value="خواهشمند است کلیه فایلهای مربوطه را آپلود کنید"  styleClass="btitr18-red" /><br/>
+<h:outputLabel value="حداکثر حجم فایل آپلودی 10 مگابایت می باشد"  styleClass="btitr18-red" />
+
+
+<br/>
+
+<br/>
+
+<h:panelGrid  width="700" columns="1" id="panel">
+    <ui:repeat  value="#{UploadsMB.getFilestouploadList()}" var="item">
+			<p:spacer height="10"></p:spacer>
+	      	<p:panelGrid columns="3"  >	
+			        <f:facet name="header">
+				 		<h:outputLabel for="image2" value="#{item.title}" styleClass="btitr16-blue"/>
+				 		<h:outputLabel rendered="#{item.isrequired}" for="image2" value=" - (اجباری)-" styleClass="bnazaninbold18-red"/>
+				 		<h:outputLabel rendered="#{!item.isrequired}" for="image2" value=" - (اختیاری)-" styleClass="bnazaninbold18-red"/>
+				 		<h:outputLabel for="image2" value="-(#{item.filetype})-" styleClass="btitr16-blue"/>
+				 		<h:outputLabel for="image2" value=" #{UploadsMB.ff(item.id)}" styleClass="btitr16-red"/>
+
+            			<h:commandLink rendered="#{UploadsMB.ff(item.id).length()>=1}" action="#{UploadsMB.downloadfile(item.id)}" 
+            				value=" (دانلود فایل)"  styleClass="bnazaninbold18-red"/>
+			  		</f:facet>
+					
+					<p:column>
+				    	<p:fileUpload update=":upform" oncomplete="PF('dlg1').show();" fileUploadListener="#{UploadsMB.uploadfile}"   >
+				        	<f:attribute name="val" value="#{item.uploadfilename}" />	
+			 	     	</p:fileUpload>
+			     	</p:column>		
+			     	
+		    </p:panelGrid>
+		    
+		    <hr/>
+		    
+	</ui:repeat>	
+</h:panelGrid>
+	
+	<br/>
+		 
+</h:form>
+</ui:define>
+</ui:composition>
+
+
+
+
+
