@@ -1,0 +1,45 @@
+<ui:composition template="/templates/CPanelLayout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<ui:define id="content" name="content">
+<br/><br/>
+
+	 
+<h:form id="frmMain">
+
+
+
+		<h:panelGrid columns="2">
+
+			<p:outputLabel for="Book" value="کد کتاب: " styleClass="bnazaninbold16-blue" />
+			<p:inputText id="Book" value="#{AmanatMB.baseEntity.book.id}" required="true"
+				styleClass="bnazaninbold18" requiredMessage="فيلد کد کتاب نبايد خالي باشد.">
+			</p:inputText>
+			
+			
+			
+			<p:outputLabel for="member" value="کد عضو: " styleClass="bnazaninbold16-blue" />
+			<p:inputText id="member" value="#{AmanatMB.baseEntity.member.id}" required="true"
+				styleClass="bnazaninbold18" requiredMessage="فيلد کد عضو نبايد خالي باشد.">
+			</p:inputText>
+	
+		</h:panelGrid>
+	
+		<br/>
+        <p:commandButton  type="submit" value="ثبت امانت" action="#{AmanatMB.Add()}" ajax="true" 
+       		style="width:180px !important;" icon="ui-icon-gNew"/>
+
+		<p:messages styleClass="bnazaninbold16-red" id="messages" showDetail="false" autoUpdate="true" closable="true" />
+	
+	
+</h:form>
+
+
+<br/><br/><br/><br/><br/><br/>
+    
+</ui:define>
+</ui:composition>
